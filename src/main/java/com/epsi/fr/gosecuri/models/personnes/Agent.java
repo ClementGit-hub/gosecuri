@@ -39,6 +39,10 @@ public class Agent extends Employe {
 		
 		return sb;
 	}
+	
+	public String getPrenomNom() {
+		return prenom + " " + nom;
+	}
 
 	public String getNom() {
 		return nom;

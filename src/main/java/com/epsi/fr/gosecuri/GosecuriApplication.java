@@ -11,9 +11,7 @@ public class GosecuriApplication {
 	public static void main(String[] args) {
 //		SpringApplication.run(GosecuriApplication.class, args);
 		
-		String cheminFichier = "";
-		
-		new Recuperation(cheminFichier);
+		new Recuperation();
 	}
 
 }

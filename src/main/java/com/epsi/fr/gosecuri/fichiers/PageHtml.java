@@ -1,10 +1,14 @@
 package com.epsi.fr.gosecuri.fichiers;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 // voir ce github pour l'améliorer
 //https://github.com/xmlet/HtmlFlow
 public class PageHtml {
 	
+	// Base
 	private String head = "head";
 	private String titrePage = "GOsecuri";
 	private String linkCss = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css";
@@ -14,8 +18,14 @@ public class PageHtml {
 	private String description = "description";
 	private String priority = "priority";
 	
-	public PageHtml() {
-
+	// Creation html
+	private String nom = "";
+	private String cheminDossierFichierHtml = "";
+	private String extensionHtml = ".html";
+	
+	public PageHtml(String nomFichierHtml, String cheminDossierFichierHtml) {
+		this.nom = nomFichierHtml;
+		this.cheminDossierFichierHtml = cheminDossierFichierHtml;
 	}
 
 	public String toString() {
@@ -37,22 +47,30 @@ public class PageHtml {
 		return maquette.toString();
 	}
 	
-	public void bodyAcceuil() {
-		this.body = "<body>\r\n"
-				+ "    <div class=\"background\">\r\n"
-				+ "        <div class=\"shape\" ></div>\r\n"
-				+ "        <div class=\"shape\"></div>\r\n"
-				+ "    </div>\r\n"
-				+ "    <div class=\"container-list\">\r\n"
-				+ "        <div class=\"Logo\"><img src=\"Images/Logo.png\" /></div>\r\n"
-				+ "        <ul class=\"agents-list\">\r\n"
-				+ "            <a href=\"agent.html\"><li>Alexander Foley</li></a>\r\n"
-				+ "            <a href=\"agent.html\"><li>Boris Vian</li></a>\r\n"
-				+ "            <a href=\"agent.html\"><li>Corinne Berthier</li></a>\r\n"
-				+ "            <a href=\"agent.html\"><li>...</li></a>\r\n"
-				+ "        </ul>\r\n"
-				+ "    </div>\r\n"
-				+ "</body>";
+	public File creationFichierHtml() {
+		
+		String chemin = cheminDossierFichierHtml + nom + extensionHtml;
+		
+	    try {
+	        FileWriter myWriter = new FileWriter(chemin);
+	        
+	        myWriter.write(this.toString());
+	        myWriter.close();
+	        
+	        return new File(chemin);
+	        
+	      } 
+	      catch (IOException e) {
+	        System.out.println("An error occurred.");
+	        e.printStackTrace();
+	      }
+	    
+		return null;
+		
+	}
+
+	public void setBody(String body) {
+		this.body = body;
 	}
 
 }

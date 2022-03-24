@@ -15,350 +15,176 @@ import java.util.Map.Entry;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import org.springframework.batch.item.util.FileUtils;
+
+import com.epsi.fr.gosecuri.commun.Commun;
 import com.epsi.fr.gosecuri.fichiers.PageHtml;
 import com.epsi.fr.gosecuri.models.personnes.Agent;
+import com.epsi.fr.gosecuri.models.personnes.listes.Agents;
+import com.epsi.fr.gosecuri.models.personnes.listes.ListeMateriel;
 import com.epsi.fr.gosecuri.models.personnes.materiels.Materiel;
 
 public class Recuperation {
 	
-	public Map<String, Materiel> listeMateriel = new HashMap<String, Materiel>();
-
 	public List<String> listePersonnes = new ArrayList<String>();
+	public Agents agents = new Agents();
 	
-	public Map<String, Agent> listeAgentDetails = new HashMap<String, Agent>();
+	// La flemme de mettre tout en maj
+	// Faudrait soit le mettre dans un fichier xml soit dans une classe ou interface dédié
+    public static final String cheminDossierFichierHtml = "C:\\Users\\escan\\eclipse-workspace\\gosecuri\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\html\\";
 	
-	public Map<String, ImageIcon> listeCarteIdentite = new HashMap<String, ImageIcon>();
-	
-	public Recuperation(String cheminFichier) {
+    //Type page
+    public static final String ACCUEIL_STR = "ACCUEIL";
+    
+	public Recuperation() {
 		
-		//StringBuffre, Stream
-		
-		cheminFichier = "gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/";
-				
-		String cheminMateriels = "Materials";
+		String cheminFichier = "gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/";
 		
 		//Test chemin d'accès si / transformer en \\
 		
 		String nomFichier = "liste.txt";
 		
-		String cheminMateriel = initChemRecupFichier(cheminFichier, cheminMateriels, nomFichier);
+//		String cheminMateriel = initChemRecupFichier(cheminFichier, cheminMateriel, nomFichier);
+        
+        String identifiantEmploye = "";
+        // Non utilisé pour les tests/maintenance
+        List<File> listeFileAgent = new ArrayList<>();
+        
+        for (Entry<String, Agent> mapentry : agents.getListeAgentDetails().entrySet()) {
+        	
+        	identifiantEmploye = mapentry.getValue().getIdentifiantEmploye();
+        	
+        	System.out.println("mapentry : " + identifiantEmploye);
+        	
+    		PageHtml pageAgent = new PageHtml(identifiantEmploye, cheminDossierFichierHtml);
+    		pageAgent.setBody(this.bodyAgent(mapentry.getValue()));
+    		listeFileAgent.add(pageAgent.creationFichierHtml());
+        	
+		}
+//        
+//		String nomAccueil = "acceuil";
+//		
+//		// pas le temps mais il faudrait faire une interface PageHTML puis des pages AccueilHTML, etc... qui l'implémente
+//		PageHtml pageAccueil = new PageHtml(nomAccueil, cheminDossierFichierHtml);
+//		pageAccueil.setBody(this.bodyAcceuil());
+//		// Non utilisé pour les tests/maintenance
+//		File pageAcceuil  = pageAccueil.creationFichierHtml();
 		
-		cheminMateriel = "..\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\git\\GoSecuri-master\\Materials\\liste.txt";
+	}
+	
+//	private File creationFichierAgent(Agent agent) {
+//		
+//		String identifiantEmploye = agent.getIdentifiantEmploye();
+//		String extensionHtml = ".html";
+//		
+//		System.out.println("ch : "+cheminDossierFichierHtml + identifiantEmploye + extensionHtml);
+//		
+//	    try {
+//	        FileWriter myWriter = new FileWriter(cheminDossierFichierHtml + identifiantEmploye + extensionHtml);
+//	        
+//	        PageHtml pageAgent = new PageHtml(extensionHtml, extensionHtml);
+//	        
+//	        myWriter.write(pageAgent.toString());
+//	        myWriter.close();
+//	        
+//	      } 
+//	      catch (IOException e) {
+//	        System.out.println("An error occurred.");
+//	        e.printStackTrace();
+//	      }
+//		
+//		return null;
+//	}
+	
+	// Localisation ???? -> dans classe PageAccueilHTML
+	public String bodyAcceuil() {
+		
+		StringBuffer retour = new StringBuffer();
+		StringBuffer modif = new StringBuffer();
+		String ph = "";
+
+		for (Entry<String, Agent> mapentry : agents.getListeAgentDetails().entrySet()) {
+			
+			ph = "            <a href=\"agent.html\"><li>" + mapentry.getValue().nom + "</li></a>\r\n";
+			modif.append(ph);
+		}
+		
+		retour.append("<body>\r\n"
+				+ "    <div class=\"background\">\r\n"
+				+ "        <div class=\"shape\" ></div>\r\n"
+				+ "        <div class=\"shape\"></div>\r\n"
+				+ "    </div>\r\n"
+				+ "    <div class=\"container-list\">\r\n"
+				+ "        <div class=\"Logo\"><img src=\"Images/Logo.png\" /></div>\r\n"
+				+ "        <ul class=\"agents-list\">\r\n"
+				+ modif
+				+ "        </ul>\r\n"
+				+ "    </div>\r\n"
+				+ "</body>");
+		
+		return retour.toString();
+	}
+	
+	// Même que l'accueil a changé !!!!
+	public String bodyAgent(Agent agent) {
+		
+		StringBuffer retour = new StringBuffer();
+		StringBuffer modif = new StringBuffer();
+		String ph = "";
+		
+		String cheminImages  = "/gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Images";
+		
+		int i = 0;
+		
+		for (Entry<String, Materiel> mapentry : agents.getListeMateriel().entrySet()) {
+			
+//			System.out.println("materiel : " + mapentry.getValue().getNom());
+			
+//			System.out.println("Liste Materiel Agent : " + agent.listeMateriel.get(i));
+			
+			String nomMateriel =  mapentry.getValue().getNom();
+			
+			modif.append("<li>" + nomMateriel);
+
+			if(mapentry.getValue() == agent.listeMateriel.get(0)) {
+				modif.append(" <img src=\\" + cheminImages + "/check-square-regular.svg\" alt=\"check\" class=\"check-icon\"> 1");
+	
+//				ph += " <img src=\"Images/check-square-regular.svg\" alt=\"check\" class=\"check-icon\"></li>";
+			} else {
+				modif.append(" <img src=\\" + cheminImages + "/check-square-regular.svg\" alt=\"check\" class=\"check-icon\"> 2");
 				
-		listeMateriel = recupMateriel(cheminMateriel);
-		
-        for (Entry<String, Materiel> mapentry : listeMateriel.entrySet()) {
-        	System.out.println("clé: "+mapentry.getKey() + " | valeur: " + mapentry.getValue().getNom()+ " | valeur: " + mapentry.getValue().getType());
-        
-		}
-        
-        String cheminListeAgents = "..\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\git\\GoSecuri-master\\AgentsList\\staff.txt";
-        
-        listePersonnes = recupListeEmployes(cheminListeAgents);
-		
-        for (String identifiantPersonne : listePersonnes) {
-        	System.out.println("valeur: " + identifiantPersonne);
-        
-		}
-        
-        String cheminDossierAgentDetails = "..\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\git\\GoSecuri-master\\AgentDetails";
-        
-        listeAgentDetails = recupListeAgentsDetails(cheminDossierAgentDetails);
-		
-        for (String identifiantPersonne : listePersonnes) {
-        	System.out.println("valeur: " + identifiantPersonne);
-        
-		}
-        
-        String cheminDossierCartesIdentites = "..\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\git\\GoSecuri-master\\Identities";
-        
-        listeCarteIdentite = recupListeCartesIdentite(cheminDossierCartesIdentites);
-	
-        String cheminDossierFichierHtml = "C:\\Users\\escan\\eclipse-workspace\\gosecuri\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\html\\";
-        
-        for (Entry<String, Agent> mapentry : listeAgentDetails.entrySet()) {
-        	
-        	System.out.println("mapentry : "+mapentry.getValue().getIdentifiantEmploye());
-        	
-        	creationFichierHtml(cheminDossierFichierHtml, mapentry.getValue());
-        	
-		}
-        
-        //Page d'acceuil
-        PageHtml pageHtml = new PageHtml();
-        pageHtml.bodyAcceuil();
-        
-        
-	}
-	
-	
-	private String initChemRecupFichier(String cheminFichier, String cheminMateriels, String nomFichier) {
-		return "";
-	}
-	
-	private File creationFichierHtml(String chemin, Agent agent) {
-		
-		String identifiantEmploye = agent.getIdentifiantEmploye();
-		String extensionHtml = ".html";
-		
-		System.out.println("ch : "+chemin + identifiantEmploye + extensionHtml);
-		
-	    try {
-	        FileWriter myWriter = new FileWriter(chemin + identifiantEmploye + extensionHtml);
-	        
-	        PageHtml pageAgent = new PageHtml();
-	        
-	        myWriter.write(pageAgent.toString());
-	        myWriter.close();
-	        
-	      } 
-	      catch (IOException e) {
-	        System.out.println("An error occurred.");
-	        e.printStackTrace();
-	      }
-		
-		return null;
-		
-	}
-	
-	//A revoir
-	public Map<String, ImageIcon> recupListeCartesIdentite(String cheminDossierAgentDetails)
-    { 
-      File dir  = new File(cheminDossierAgentDetails);
-      File[] liste = dir.listFiles();
-      for(File file : liste){
-    	  
-    	  String identifiantEmployeAvecExtension = file.getName();
-    	  
-    	  System.out.println("c identifiantEmployeAvecExtension : "+identifiantEmployeAvecExtension);
-    	  
-    	  String identifiantEmploye = identifiantEmployeAvecExtension;
-    	  
-    	  System.out.println("c identifiantEmploye : "+identifiantEmploye);
-    	  
-    	  System.out.println("c file.getAbsolutePath() : "+file.getAbsolutePath());
-    	  
-			BufferedImage myPicture = null;
-			try {
-				myPicture = ImageIO.read(file);
-			} catch (IOException e1) {
-				e1.printStackTrace();
+//				ph += " <img src=\"Images/check-square-regular.svg\" alt=\"check\" class=\"check-icon\"></li>";
+				
 			}
-			ImageIcon carteIdentite = new ImageIcon(myPicture);
-    	  
-    	  listeCarteIdentite.put(identifiantEmploye, carteIdentite);
-          
-  		}
-    	  
-      return listeCarteIdentite;
-    } 
-	
-	
-	
-	
-	
-	public Map<String, Agent> recupListeAgentsDetails(String cheminDossierAgentDetails)
-    { 
-      File dir  = new File(cheminDossierAgentDetails);
-      File[] liste = dir.listFiles();
-      for(File file : liste){
-//        if(item.isFile())
-//        { 
-//          System.out.format("Nom du fichier: %s%n", item.getName()); 
-//        } 
-//        else if(item.isDirectory())
-//        {
-//          System.out.format("Nom du répertoir: %s%n", item.getName()); 
-//        } 
-    	  
-    	  String identifiantEmployeAvecExtension = file.getName();
-    	  
-    	  System.out.println("identifiantEmployeAvecExtension : "+identifiantEmployeAvecExtension);
-    	  
-//  afoley.txt -> afoley  
-    	  
-// Test avec le staff ??
-    	  
-    	  String identifiantEmploye = identifiantEmployeAvecExtension;
-    	  
-    	  System.out.println("identifiantEmploye : "+identifiantEmploye);
-    	  
-    	  
-    	  
-    	  System.out.println("file.getAbsolutePath() : "+file.getAbsolutePath());
-    	  
-    	  listeAgentDetails.put(identifiantEmploye, recupAgentsDetails(file.getAbsolutePath()));
-      }
-      return listeAgentDetails;
-    } 
-	
-	private Agent recupAgentsDetails(String cheminFichier) {
-		
-		String identifiantEmploye = "afoley";
-		String nom = null;
-		String prenom = null;
-		String poste = null;
-		String motDePasse = null;
-		
-		List<Materiel> listeMaterielAgent = new ArrayList<>();
-		
-		System.out.println("cheminFichier : "+cheminFichier);
-		
-		//Per
-		cheminFichier = cheminFichier.replace("/", File.separator);
-		
-		System.out.println("cheminFichier : "+cheminFichier);
-		
-		String cheminCarteIdentite = "..\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\git\\GoSecuri-master\\Identities\\afoley.jpg";
-		
-//		String cheminCarteIdentite = cheminFichier;
-		
-		BufferedImage myPicture = null;
-		try {
-			myPicture = ImageIO.read(new File(cheminCarteIdentite));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		ImageIcon carteIdentite = new ImageIcon(myPicture);
-		
-        try(BufferedReader br = new BufferedReader(new FileReader(cheminFichier))) 
-        {
-            String line;
-            
-            //A revoir
-            int i = 0;
-            
-            while ((line = br.readLine()) != null) {
-            	
-            	System.out.println(" i : "+i);
-            	
-            	if(line.replace(" ","").length() == 0) {
-            		continue;
-            	}
-            	
-            	switch (i) {
-					case 0:	nom = line;
-					i ++;
-						continue;
-						
-					case 1:	prenom = line;
-					i ++;
-						continue;
-						
-					case 2:	poste = line;
-					i ++;
-						continue;
-						
-					case 3:	motDePasse = line.replace(" ","");
-					i ++;
-						continue;
-
-					default:	System.out.println("i non pris en compte");
-						break;
-				}
-            	
-
-        		listeMaterielAgent.add(listeMateriel.get(line));
-            	
-            	i ++;
-            }
-        }
-        catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-        
-        //A enlever !!
-        System.out.println(" Agent.toString"+new Agent(identifiantEmploye, nom, prenom, poste, motDePasse, carteIdentite, listeMaterielAgent).toString());
-        
-        return new Agent(identifiantEmploye, nom, prenom, poste, motDePasse, carteIdentite, listeMaterielAgent);
-   
-	}
-	
-	private List<String> recupListeEmployes(String cheminFichier) {
-		
-		List<String> listePersonnes = new ArrayList<String>();
-               
-        System.out.println("cheminFichier : "+cheminFichier);
-        
-        try(BufferedReader br = new BufferedReader(new FileReader(cheminFichier))) 
-        {
-            String line;
-            while ((line = br.readLine()) != null) {
-            	
-            	line = line.replace(" ","");
-            	
-            	System.out.println(line);
-            	
-            	listePersonnes.add(line);
-            }
-        }
-        catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-        
-        return listePersonnes;
-   
-	}
-	
-	private Map<String, Materiel> recupMateriel(String cheminFichier) {
-		
-		Map<String, Materiel> listeMateriel = new HashMap<String, Materiel>();
-        
-//        System.out.println("cheminFichier : "+cheminFichier);
-//        
-//        cheminFichier.replace("/", "\\");
-//        
-        System.out.println("cheminFichier : "+cheminFichier);
-        
-        try(BufferedReader br = new BufferedReader(new FileReader(cheminFichier))) 
-        {
-            String line;
-            while ((line = br.readLine()) != null) {
-            	
-            	System.out.println(line);
-            	
-            	int indicePremiereMajuscule = indicePremiereMajuscule(line);
-            	
-            	System.out.println("indicePremiereMajuscule : "+indicePremiereMajuscule);
-            	
-            	if(indicePremiereMajuscule == -1) {
-            		System.out.println("Erreur : indicePremiereMajuscule");
-//            		throw new Exception("indicePremiereMajuscule"); ???
-            		continue;
-            	}
-            	
-            	String nomMateriel = line.substring(0, indicePremiereMajuscule);
-            	String typeMateriel = line.substring(indicePremiereMajuscule, line.length());
-            	
-            	System.out.println("nomMateriel : "+nomMateriel);
-            	System.out.println("typeMateriel : "+typeMateriel);
-            	
-            	listeMateriel.put(nomMateriel, new Materiel(nomMateriel, typeMateriel));
-            }
-        }
-        catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-        
-        return listeMateriel;
-   
-	}
-	
-	
-	
-	
-	public int indicePremiereMajuscule(String chaine) {
-		
-		for (int indiceChar = 0; indiceChar < chaine.length(); indiceChar++) {
-			if(Character.isUpperCase(chaine.charAt(indiceChar))) {
-				return indiceChar;
-			}	
+			
+			modif.append("</li>");
+			
+			i++;
 		}
 		
-		return -1;
-	}
+//		System.out.println("nom agent : " + agent.getPrenomNom());
+//		System.out.println("agent.getIdentifiantEmploye() : " + agent.getIdentifiantEmploye());
+		
+		retour.append("<body>"
+					+ "<div class==\"background=\">\">\r\n"
+					+ "<div class=\"shape-agent\" ></div>"
+					+ "<div class=\"shape-agent\"></div>"
+					+ "</div>"
+					+ "<div class=\"container-agent\">"
+					+ "<p class=\"agent-name\">"
+					+ agent.getPrenomNom()
+					+ "</p>"
+					+ "<ul class=\"materials-list\">"
+					+ modif
+					+ "</ul>"
+					+ "<div class=\"frame-img\">"
+					+ "<img src=\"Images/" + agent.getIdentifiantEmploye() + ".jpg\" alt=\"Id card\" class=\"id-card\">"
+					+ "</div>"
+					+ "</div>"
+					+ "</body>");
 
+		
+		return retour.toString();
+	}
+	
 }
