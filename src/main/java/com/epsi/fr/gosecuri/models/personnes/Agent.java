@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+
+import com.epsi.fr.gosecuri.models.personnes.documents.CarteIdentite;
 import com.epsi.fr.gosecuri.models.personnes.materiels.Materiel;
 
 
@@ -14,12 +16,12 @@ public class Agent extends Employe {
 	public String prenom;
 	public String poste;
 	public String motdepasse;
-	public ImageIcon carteIdentite;
+	public CarteIdentite carteIdentite;
 	
 	public List<Materiel> listeMateriel = new ArrayList<Materiel>();
 
 	public Agent(String identifiantEmploye, String nom, String prenom, String poste, String motdepasse,
-			ImageIcon carteIdentite, List<Materiel> listeMateriel) {
+			CarteIdentite carteIdentite, List<Materiel> listeMateriel) {
 		
 		super(identifiantEmploye);
 		this.nom = nom;
@@ -76,11 +78,11 @@ public class Agent extends Employe {
 		this.motdepasse = motdepasse;
 	}
 
-	public ImageIcon getCarteIdentite() {
+	public CarteIdentite getCarteIdentite() {
 		return carteIdentite;
 	}
 
-	public void setCarteIdentite(ImageIcon carteIdentite) {
+	public void setCarteIdentite(CarteIdentite carteIdentite) {
 		this.carteIdentite = carteIdentite;
 	}
 

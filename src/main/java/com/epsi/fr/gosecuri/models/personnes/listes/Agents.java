@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 
 import com.epsi.fr.gosecuri.commun.Commun;
 import com.epsi.fr.gosecuri.models.personnes.Agent;
+import com.epsi.fr.gosecuri.models.personnes.documents.CarteIdentite;
 import com.epsi.fr.gosecuri.models.personnes.materiels.Materiel;
 
 public class Agents {
@@ -99,17 +100,20 @@ public class Agents {
 		
 		System.out.println("cheminFichier : "+cheminFichier);
 		
-		String cheminCarteIdentite = "..\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\git\\GoSecuri-master\\Identities\\" + identifiantEmploye + ".jpg";
+		String cheminCarteIdentite = "C:/Users/escan/eclipse-workspace/gosecuri/gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Identities/" + identifiantEmploye + ".jpg";
 		
 //		String cheminCarteIdentite = cheminFichier;
 		
-		BufferedImage myPicture = null;
-		try {
-			myPicture = ImageIO.read(new File(cheminCarteIdentite));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		ImageIcon carteIdentite = new ImageIcon(myPicture);
+		//A revoir pour le moment aucune idée
+//		BufferedImage myPicture = null;
+//		try {
+//			myPicture = ImageIO.read(new File(cheminCarteIdentite));
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		}
+//		ImageIcon carteIdentite = new ImageIcon(myPicture);
+		
+		CarteIdentite carteIdentite = new CarteIdentite(cheminCarteIdentite);
 		
         try(BufferedReader br = new BufferedReader(new FileReader(cheminFichier))) 
         {

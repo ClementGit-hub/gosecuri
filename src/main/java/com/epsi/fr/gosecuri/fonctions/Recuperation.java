@@ -132,7 +132,9 @@ public class Recuperation {
 		StringBuffer modif = new StringBuffer();
 		String ph = "";
 		
-		String cheminImages  = "/gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Images";
+//		String cheminImages  = "/gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Images";
+//		String cheminImages = agent.getCarteIdentite().getCheminAcces();
+		String cheminImages = "/gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Images/Logo.png";
 		
 		int i = 0;
 		
@@ -169,6 +171,12 @@ public class Recuperation {
 //		System.out.println("nom agent : " + agent.getPrenomNom());
 //		System.out.println("agent.getIdentifiantEmploye() : " + agent.getIdentifiantEmploye());
 		
+		String cheminAccesCarteId = agent.getCarteIdentite().getCheminAcces();
+//		String cheminAccesCarteId = "../../../../../src/main/resources/static/fichiersTest/git/GoSecuri-master/Identities/afoley.jpg";
+		
+//		String cheminAccesCarteId = "..\\gosecuri\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\git\\GoSecuri-master\\Images\\Logo.png";
+		System.out.println("chemin carte id : " + cheminAccesCarteId);
+		
 		retour.append("<body>"
 					+ "<div class==\"background=\">\">\r\n"
 					+ "<div class=\"shape-agent\" ></div>"
@@ -182,7 +190,9 @@ public class Recuperation {
 					+ modif
 					+ "</ul>"
 					+ "<div class=\"frame-img\">"
-					+ "<img src=\"Images/" + agent.getIdentifiantEmploye() + ".jpg\" alt=\"Id card\" class=\"id-card\">"
+//					+ "<img src=\"Images/" + cheminAccesCarteId + "\" alt=\"Id card\" class=\"id-card\">"
+//					+ "<img src=" + cheminAccesCarteId + "\" alt=\"Id card\" class=\"id-card\">"
+					+ "<img src=" + cheminAccesCarteId + ">"
 					+ "</div>"
 					+ "</div>"
 					+ "</body>");
