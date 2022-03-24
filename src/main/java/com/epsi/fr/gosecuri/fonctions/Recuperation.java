@@ -136,6 +136,10 @@ public class Recuperation {
 		
 		int i = 0;
 		
+		System.out.println("agent : " + agent.getNom());
+		System.out.println("agent.getListeMateriel() : " + agent.getListeMateriel().toString());
+		
+		
 		for (Entry<String, Materiel> mapentry : agents.getListeMateriel().entrySet()) {
 			
 //			System.out.println("materiel : " + mapentry.getValue().getNom());
@@ -146,7 +150,7 @@ public class Recuperation {
 			
 			modif.append("<li>" + nomMateriel);
 
-			if(mapentry.getValue() == agent.listeMateriel.get(0)) {
+			if(bMaterielExiste(nomMateriel, agent)) {
 				modif.append(" <img src=\\" + cheminImages + "/check-square-regular.svg\" alt=\"check\" class=\"check-icon\"> 1");
 	
 //				ph += " <img src=\"Images/check-square-regular.svg\" alt=\"check\" class=\"check-icon\"></li>";
@@ -185,6 +189,18 @@ public class Recuperation {
 
 		
 		return retour.toString();
+	}
+	
+	public boolean bMaterielExiste(String nomMateriel, Agent agent) {
+		
+		for(Materiel materiel : agent.getListeMateriel()) {
+			
+			if(nomMateriel.equals(materiel.getNom())) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 }
