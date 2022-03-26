@@ -44,21 +44,26 @@ public class Agents {
 //          System.out.format("Nom du répertoir: %s%n", item.getName()); 
 //        } 
     	  
-    	  String identifiantEmployeAvecExtension = file.getName();
+    	  String identifiantEmploye = getFileNameWithoutExtension(file.getName());
     	  
-//    	  System.out.println("identifiantEmployeAvecExtension : "+identifiantEmployeAvecExtension);
-    	  
-// Test avec le staff ??
-    	  
-    	  String identifiantEmploye = identifiantEmployeAvecExtension;
-    	  
-//    	  System.out.println("identifiantEmploye : "+identifiantEmploye);
-//    	  System.out.println("file.getAbsolutePath() : "+file.getAbsolutePath());
-    	  
+    	  System.out.println("identifiantEmploye : "+ identifiantEmploye);
+
     	  listeAgent.put(identifiantEmploye, recupAgentsDetails(file.getAbsolutePath()));
       }
       return listeAgent;
     }
+	
+	public static String getFileNameWithoutExtension(String fileName) {
+		
+		if (fileName.indexOf(".") > 0) {
+			return fileName.substring(0, fileName.lastIndexOf("."));
+			
+		} else {
+		   return fileName;
+		}
+	}
+	
+
 	
 	public Map<String, Agent> getListeAgentDetails() {
 		return listeAgentDetails;
@@ -83,31 +88,13 @@ public class Agents {
 		
 		List<Materiel> listeMaterielAgent = new ArrayList<>();
 		
-//		System.out.println("cheminFichier : "+cheminFichier);
-		
 		// Vraiment bofbof
 		String nomFichier = new File(cheminFichier).getName();
 		identifiantEmploye = nomFichier.substring(0, nomFichier.lastIndexOf('.'));
 		
-//		System.out.println("nom fichier : "+identifiantEmploye);
-		
-		//Per
-		cheminFichier = cheminFichier.replace("/", File.separator);
-		
-		System.out.println("cheminFichier : "+cheminFichier);
-		
-//		String cheminCarteIdentite = "C:/Users/escan/eclipse-workspace/gosecuri/gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Identities/" + identifiantEmploye + ".jpg";
 		String cheminCarteIdentite = Commun.cheminDossierGitGoSecuri + "\\Identities\\" + identifiantEmploye + ".jpg";
-//		String cheminCarteIdentite = cheminFichier;
 		
-		//A revoir pour le moment aucune idée
-//		BufferedImage myPicture = null;
-//		try {
-//			myPicture = ImageIO.read(new File(cheminCarteIdentite));
-//		} catch (IOException e1) {
-//			e1.printStackTrace();
-//		}
-//		ImageIcon carteIdentite = new ImageIcon(myPicture);
+		System.out.println("cheminCarteIdentite : " + cheminCarteIdentite);
 		
 		CarteIdentite carteIdentite = new CarteIdentite(cheminCarteIdentite);
 		

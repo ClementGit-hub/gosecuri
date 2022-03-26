@@ -1,6 +1,8 @@
 package com.epsi.fr.gosecuri.fonctions;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -25,15 +27,8 @@ public class Recuperation {
     
 	public Recuperation() {
 		
-//		String cheminFichier = "gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/";
-		
-		//Test chemin d'accès si / transformer en \\
-		
-//		String nomFichier = "liste.txt";
-		
-//		String cheminMateriel = initChemRecupFichier(cheminFichier, cheminMateriel, nomFichier);
-        
         String identifiantEmploye = "";
+        
         // Non utilisé pour les tests/maintenance
         List<File> listeFileAgent = new ArrayList<>();
         
@@ -46,6 +41,12 @@ public class Recuperation {
     		PageHtml pageAgent = new PageHtml(identifiantEmploye, Commun.cheminDossierHtml);
     		pageAgent.setBody(this.bodyAgent(mapentry.getValue()));
     		listeFileAgent.add(pageAgent.creationFichierHtml());
+    		
+//    		String cheminFichierMdp = Commun.cheminDossierMdp + ".htpasswd.txt";
+    		
+//    		File fichierMdp = creationFichier(Commun.cheminDossierMdp, ".htpasswd", ".txt");
+    		
+    		
         	
 		}
         
@@ -54,8 +55,34 @@ public class Recuperation {
 		// pas le temps mais il faudrait faire une interface PageHTML puis des pages AccueilHTML, etc... qui l'implémente
 		PageHtml pageAccueil = new PageHtml(nomAccueil, Commun.cheminDossierHtml);
 		pageAccueil.setBody(this.bodyAcceuil());
+		
 		// Non utilisé pour les tests/maintenance
 		File pageAcceuil  = pageAccueil.creationFichierHtml();
+		
+		
+		
+		
+	}
+	
+	public File creationFichier(String cheminDossier, String nom, String extensionHtml) {
+		
+		String chemin = cheminDossier + "\\" + nom + extensionHtml;
+		
+	    try {
+	        FileWriter myWriter = new FileWriter(chemin);
+	        
+	        myWriter.write(this.toString());
+	        myWriter.close();
+	        
+	        return new File(chemin);
+	        
+	      } 
+	      catch (IOException e) {
+	        System.out.println("An error occurred.");
+	        e.printStackTrace();
+	      }
+	    
+		return null;
 		
 	}
 	
@@ -92,12 +119,18 @@ public class Recuperation {
 
 		for (Entry<String, Agent> mapentry : agents.getListeAgentDetails().entrySet()) {
 			
-			ph = "            <a href=\"agent.html\"><li>" + mapentry.getValue().nom + "</li></a>\r\n";
+			System.out.println("mapentry.getKey() : " + mapentry.getKey());
+			
+			ph = "            <a href=\"" + mapentry.getKey() +".html\"><li>" + mapentry.getValue().nom + "</li></a>\r\n";
 			modif.append(ph);
 		}
 		
 		String cheminLogo = Commun.cheminDossierGitGoSecuri + "\\Images\\Logo.png";
 //		+ "        <div class=\"Logo\"><img src=\"Images/Logo.png\" /></div>\r\n"
+		
+		cheminLogo = "../gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Images/Logo.png";
+		
+		System.out.println("cheminLogo : " + cheminLogo);
 		
 		retour.append("<body>\r\n"
 				+ "    <div class=\"background\">\r\n"
@@ -120,57 +153,36 @@ public class Recuperation {
 		
 		StringBuffer retour = new StringBuffer();
 		StringBuffer modif = new StringBuffer();
-//		String ph = "";
-		
-//		String cheminImages  = "/gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Images";
-//		String cheminImages = agent.getCarteIdentite().getCheminAcces();
-//		String cheminImages = "/gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Images/Logo.png";
 		
 		String imageSquareCheck = Commun.cheminDossierGitGoSecuri + "\\Images\\check-square-regular.svg";
 		
-//		int i = 0;
+		System.out.println("imageSquareCheck : " + imageSquareCheck);
+		
+//		imageSquareCheck = "C:\\Users\\escan\\eclipse-workspace\\gosecuri\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\git\\GoSecuri-master\\Images\\check-square-regular.svg";
+//		
+//		System.out.println("imageSquareCheck : " + imageSquareCheck);
 		
 		System.out.println("agent : " + agent.getNom());
 		System.out.println("agent.getListeMateriel() : " + agent.getListeMateriel().toString());
 		
 		for (Entry<String, Materiel> mapentry : agents.getListeMateriel().entrySet()) {
 			
-//			System.out.println("materiel : " + mapentry.getValue().getNom());
-			
-//			System.out.println("Liste Materiel Agent : " + agent.listeMateriel.get(i));
-			
 			String nomMateriel =  mapentry.getValue().getNom();
 			
 			modif.append("<li>" + nomMateriel);
 
 			if(bMaterielExiste(nomMateriel, agent)) {
-//				ph += " <img src=\"Images/check-square-regular.svg\" alt=\"check\" class=\"check-icon\"></li>";
-//				modif.append(" <img src=\\" + cheminImages + "/check-square-regular.svg\" alt=\"check\" class=\"check-icon\"> 1");
 				modif.append(" <img src=" + imageSquareCheck + " height=\"20\" width=\"20\"> 1");
-				
-//				modif.append("<a href=\"https://www.flaticon.com/free-icons/tick\" title=\"tick icons\">");
-	
 
 			} else {
-//				ph += " <img src=\"Images/check-square-regular.svg\" alt=\"check\" class=\"check-icon\"></li>";
 				modif.append(" <img src=" + imageSquareCheck + " height=\"20\" width=\"20\"> 2");
-				
-//				modif.append("<a href=\"https://www.flaticon.com/free-icons/cross\" title=\"cross icons\">");
 				
 			}
 			
 			modif.append("</li>");
-			
-//			i++;
 		}
 		
-//		System.out.println("nom agent : " + agent.getPrenomNom());
-//		System.out.println("agent.getIdentifiantEmploye() : " + agent.getIdentifiantEmploye());
-		
 		String cheminAccesCarteId = agent.getCarteIdentite().getCheminAcces();
-//		String cheminAccesCarteId = "../../../../../src/main/resources/static/fichiersTest/git/GoSecuri-master/Identities/afoley.jpg";
-		
-//		String cheminAccesCarteId = "..\\gosecuri\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\git\\GoSecuri-master\\Images\\Logo.png";
 		System.out.println("chemin carte id : " + cheminAccesCarteId);
 		
 		retour.append("<body>"
