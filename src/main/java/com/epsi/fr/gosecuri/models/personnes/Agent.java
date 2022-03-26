@@ -1,10 +1,7 @@
 package com.epsi.fr.gosecuri.models.personnes;
 
-import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.ImageIcon;
 
 import com.epsi.fr.gosecuri.models.personnes.documents.CarteIdentite;
 import com.epsi.fr.gosecuri.models.personnes.materiels.Materiel;

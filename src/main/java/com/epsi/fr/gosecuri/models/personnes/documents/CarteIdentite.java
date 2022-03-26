@@ -1,7 +1,5 @@
 package com.epsi.fr.gosecuri.models.personnes.documents;
 
-import javax.swing.ImageIcon;
-
 public class CarteIdentite {
 	String cheminAcces = "";
 	

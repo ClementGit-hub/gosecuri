@@ -1,6 +1,5 @@
 package com.epsi.fr.gosecuri.models.personnes.listes;
 
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -9,9 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 import com.epsi.fr.gosecuri.commun.Commun;
 import com.epsi.fr.gosecuri.models.personnes.Agent;
@@ -100,8 +96,8 @@ public class Agents {
 		
 		System.out.println("cheminFichier : "+cheminFichier);
 		
-		String cheminCarteIdentite = "C:/Users/escan/eclipse-workspace/gosecuri/gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Identities/" + identifiantEmploye + ".jpg";
-		
+//		String cheminCarteIdentite = "C:/Users/escan/eclipse-workspace/gosecuri/gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Identities/" + identifiantEmploye + ".jpg";
+		String cheminCarteIdentite = Commun.cheminDossierRessource + "\\Identities\\" + identifiantEmploye + ".jpg";
 //		String cheminCarteIdentite = cheminFichier;
 		
 		//A revoir pour le moment aucune idée
