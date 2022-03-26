@@ -53,9 +53,6 @@ public class Recuperation {
 		// Non utilisé pour les tests/maintenance
 		File pageAcceuil  = pageAccueil.creationFichierHtml();
 		
-		
-		String cheminFichierMdp = Commun.cheminDossierMdp + ".htpasswd.txt";
-		
 		StringBuilder body = new StringBuilder();
 		
         for (Entry<String, Agent> mapentry : agents.getListeAgentDetails().entrySet()) {
@@ -64,7 +61,7 @@ public class Recuperation {
         	body.append("\n");
         }
         
-        File fichierMdp = creationFichier(Commun.cheminDossierMdp, ".htpasswd", ".txt", body);
+        File fichierMdp = creationFichier(Commun.cheminDossierMdp, "", ".htpasswd", body);
 		
 		
 	}
