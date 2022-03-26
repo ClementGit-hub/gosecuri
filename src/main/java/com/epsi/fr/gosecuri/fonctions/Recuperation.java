@@ -1,27 +1,13 @@
 package com.epsi.fr.gosecuri.fonctions;
 
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-
-import org.springframework.batch.item.util.FileUtils;
-
-import com.epsi.fr.gosecuri.commun.Commun;
 import com.epsi.fr.gosecuri.fichiers.PageHtml;
 import com.epsi.fr.gosecuri.models.personnes.Agent;
 import com.epsi.fr.gosecuri.models.personnes.listes.Agents;
-import com.epsi.fr.gosecuri.models.personnes.listes.ListeMateriel;
 import com.epsi.fr.gosecuri.models.personnes.materiels.Materiel;
 
 public class Recuperation {
@@ -38,11 +24,11 @@ public class Recuperation {
     
 	public Recuperation() {
 		
-		String cheminFichier = "gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/";
+//		String cheminFichier = "gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/";
 		
 		//Test chemin d'accès si / transformer en \\
 		
-		String nomFichier = "liste.txt";
+//		String nomFichier = "liste.txt";
 		
 //		String cheminMateriel = initChemRecupFichier(cheminFichier, cheminMateriel, nomFichier);
         
@@ -109,13 +95,16 @@ public class Recuperation {
 			modif.append(ph);
 		}
 		
+		String cheminLogo = "C:\\Users\\escan\\eclipse-workspace\\gosecuri\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\git\\GoSecuri-master\\Images\\Logo.png";
+//		+ "        <div class=\"Logo\"><img src=\"Images/Logo.png\" /></div>\r\n"
+		
 		retour.append("<body>\r\n"
 				+ "    <div class=\"background\">\r\n"
 				+ "        <div class=\"shape\" ></div>\r\n"
 				+ "        <div class=\"shape\"></div>\r\n"
 				+ "    </div>\r\n"
 				+ "    <div class=\"container-list\">\r\n"
-				+ "        <div class=\"Logo\"><img src=\"Images/Logo.png\" /></div>\r\n"
+				+ "        <div class=\"Logo\"><img src=" + cheminLogo + " /></div>\r\n"
 				+ "        <ul class=\"agents-list\">\r\n"
 				+ modif
 				+ "        </ul>\r\n"
@@ -130,17 +119,18 @@ public class Recuperation {
 		
 		StringBuffer retour = new StringBuffer();
 		StringBuffer modif = new StringBuffer();
-		String ph = "";
+//		String ph = "";
 		
 //		String cheminImages  = "/gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Images";
 //		String cheminImages = agent.getCarteIdentite().getCheminAcces();
-		String cheminImages = "/gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Images/Logo.png";
+//		String cheminImages = "/gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Images/Logo.png";
 		
-		int i = 0;
+		String imageSquareCheck = "C:\\Users\\escan\\eclipse-workspace\\gosecuri\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\git\\GoSecuri-master\\Images\\check-square-regular.svg";
+		
+//		int i = 0;
 		
 		System.out.println("agent : " + agent.getNom());
 		System.out.println("agent.getListeMateriel() : " + agent.getListeMateriel().toString());
-		
 		
 		for (Entry<String, Materiel> mapentry : agents.getListeMateriel().entrySet()) {
 			
@@ -153,19 +143,24 @@ public class Recuperation {
 			modif.append("<li>" + nomMateriel);
 
 			if(bMaterielExiste(nomMateriel, agent)) {
-				modif.append(" <img src=\\" + cheminImages + "/check-square-regular.svg\" alt=\"check\" class=\"check-icon\"> 1");
-	
 //				ph += " <img src=\"Images/check-square-regular.svg\" alt=\"check\" class=\"check-icon\"></li>";
-			} else {
-				modif.append(" <img src=\\" + cheminImages + "/check-square-regular.svg\" alt=\"check\" class=\"check-icon\"> 2");
+//				modif.append(" <img src=\\" + cheminImages + "/check-square-regular.svg\" alt=\"check\" class=\"check-icon\"> 1");
+				modif.append(" <img src=" + imageSquareCheck + " height=\"20\" width=\"20\"> 1");
 				
+//				modif.append("<a href=\"https://www.flaticon.com/free-icons/tick\" title=\"tick icons\">");
+	
+
+			} else {
 //				ph += " <img src=\"Images/check-square-regular.svg\" alt=\"check\" class=\"check-icon\"></li>";
+				modif.append(" <img src=" + imageSquareCheck + " height=\"20\" width=\"20\"> 2");
+				
+//				modif.append("<a href=\"https://www.flaticon.com/free-icons/cross\" title=\"cross icons\">");
 				
 			}
 			
 			modif.append("</li>");
 			
-			i++;
+//			i++;
 		}
 		
 //		System.out.println("nom agent : " + agent.getPrenomNom());
