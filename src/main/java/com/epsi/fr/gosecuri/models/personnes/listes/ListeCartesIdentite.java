@@ -13,7 +13,7 @@ import com.epsi.fr.gosecuri.commun.Commun;
 
 public class ListeCartesIdentite {
 	
-	public static final String cheminDossierCartesIdentites = Commun.cheminDossierRessource + "\\Identities";
+	public static final String cheminDossierCartesIdentites = Commun.cheminDossierGitGoSecuri + "\\Identities";
 	private String cheminDossierAgentDetails = "";
 	
 	private Map<String, ImageIcon> listeCartesIdentite = new HashMap<String, ImageIcon>();

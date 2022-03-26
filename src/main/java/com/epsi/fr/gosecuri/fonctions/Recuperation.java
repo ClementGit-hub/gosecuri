@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.epsi.fr.gosecuri.commun.Commun;
 import com.epsi.fr.gosecuri.fichiers.PageHtml;
 import com.epsi.fr.gosecuri.models.personnes.Agent;
 import com.epsi.fr.gosecuri.models.personnes.listes.Agents;
@@ -17,7 +18,7 @@ public class Recuperation {
 	
 	// La flemme de mettre tout en maj
 	// Faudrait soit le mettre dans un fichier xml soit dans une classe ou interface dédié
-    public static final String cheminDossierFichierHtml = "C:\\Users\\escan\\eclipse-workspace\\gosecuri\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\html\\";
+//    public static final String cheminDossierFichierHtml = "C:\\Users\\escan\\eclipse-workspace\\gosecuri\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\html\\";
 	
     //Type page
     public static final String ACCUEIL_STR = "ACCUEIL";
@@ -42,19 +43,19 @@ public class Recuperation {
         	
         	System.out.println("mapentry : " + identifiantEmploye);
         	
-    		PageHtml pageAgent = new PageHtml(identifiantEmploye, cheminDossierFichierHtml);
+    		PageHtml pageAgent = new PageHtml(identifiantEmploye, Commun.cheminDossierHtml);
     		pageAgent.setBody(this.bodyAgent(mapentry.getValue()));
     		listeFileAgent.add(pageAgent.creationFichierHtml());
         	
 		}
-//        
-//		String nomAccueil = "acceuil";
-//		
-//		// pas le temps mais il faudrait faire une interface PageHTML puis des pages AccueilHTML, etc... qui l'implémente
-//		PageHtml pageAccueil = new PageHtml(nomAccueil, cheminDossierFichierHtml);
-//		pageAccueil.setBody(this.bodyAcceuil());
-//		// Non utilisé pour les tests/maintenance
-//		File pageAcceuil  = pageAccueil.creationFichierHtml();
+        
+		String nomAccueil = "acceuil";
+		
+		// pas le temps mais il faudrait faire une interface PageHTML puis des pages AccueilHTML, etc... qui l'implémente
+		PageHtml pageAccueil = new PageHtml(nomAccueil, Commun.cheminDossierHtml);
+		pageAccueil.setBody(this.bodyAcceuil());
+		// Non utilisé pour les tests/maintenance
+		File pageAcceuil  = pageAccueil.creationFichierHtml();
 		
 	}
 	
@@ -95,7 +96,7 @@ public class Recuperation {
 			modif.append(ph);
 		}
 		
-		String cheminLogo = "C:\\Users\\escan\\eclipse-workspace\\gosecuri\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\git\\GoSecuri-master\\Images\\Logo.png";
+		String cheminLogo = Commun.cheminDossierGitGoSecuri + "\\Images\\Logo.png";
 //		+ "        <div class=\"Logo\"><img src=\"Images/Logo.png\" /></div>\r\n"
 		
 		retour.append("<body>\r\n"
@@ -125,7 +126,7 @@ public class Recuperation {
 //		String cheminImages = agent.getCarteIdentite().getCheminAcces();
 //		String cheminImages = "/gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Images/Logo.png";
 		
-		String imageSquareCheck = "C:\\Users\\escan\\eclipse-workspace\\gosecuri\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\git\\GoSecuri-master\\Images\\check-square-regular.svg";
+		String imageSquareCheck = Commun.cheminDossierGitGoSecuri + "\\Images\\check-square-regular.svg";
 		
 //		int i = 0;
 		
