@@ -42,12 +42,6 @@ public class Recuperation {
     		pageAgent.setBody(this.bodyAgent(mapentry.getValue()));
     		listeFileAgent.add(pageAgent.creationFichierHtml());
     		
-//    		String cheminFichierMdp = Commun.cheminDossierMdp + ".htpasswd.txt";
-    		
-//    		File fichierMdp = creationFichier(Commun.cheminDossierMdp, ".htpasswd", ".txt");
-    		
-    		
-        	
 		}
         
 		String nomAccueil = "acceuil";
@@ -60,18 +54,29 @@ public class Recuperation {
 		File pageAcceuil  = pageAccueil.creationFichierHtml();
 		
 		
+		String cheminFichierMdp = Commun.cheminDossierMdp + ".htpasswd.txt";
+		
+		StringBuilder body = new StringBuilder();
+		
+        for (Entry<String, Agent> mapentry : agents.getListeAgentDetails().entrySet()) {
+        	
+        	body.append(mapentry.getKey() + ":" + mapentry.getValue().getMotdepasse());
+        	body.append("\n");
+        }
+        
+        File fichierMdp = creationFichier(Commun.cheminDossierMdp, ".htpasswd", ".txt", body);
 		
 		
 	}
 	
-	public File creationFichier(String cheminDossier, String nom, String extensionHtml) {
+	public File creationFichier(String cheminDossier, String nom, String extensionHtml, StringBuilder body) {
 		
 		String chemin = cheminDossier + "\\" + nom + extensionHtml;
 		
 	    try {
 	        FileWriter myWriter = new FileWriter(chemin);
 	        
-	        myWriter.write(this.toString());
+	        myWriter.write(body.toString());
 	        myWriter.close();
 	        
 	        return new File(chemin);
