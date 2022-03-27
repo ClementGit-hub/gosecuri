@@ -9,7 +9,8 @@ import java.util.List;
 import com.epsi.fr.gosecuri.commun.Commun;
 
 public class ListeEmployes {
-	public static final String cheminListeAgents = Commun.cheminDossierGitGoSecuri + "\\AgentsList\\staff.txt";
+//	public static final String cheminListeAgents = Commun.cheminDossierGitGoSecuri + "\\AgentsList\\staff.txt";
+	public static final String cheminListeAgents = Commun.cheminDossierGitGoSecuri + "/AgentsList/staff.txt";
 
 	private List<String> listeEmployes = new ArrayList<String>();
 	

@@ -16,7 +16,8 @@ import com.epsi.fr.gosecuri.models.personnes.materiels.Materiel;
 
 public class Agents {
 	
-	public static final String cheminDossierAgentDetails = Commun.cheminDossierGitGoSecuri + "\\AgentDetails";
+//	public static final String cheminDossierAgentDetails = Commun.cheminDossierGitGoSecuri + "\\AgentDetails";
+	public static final String cheminDossierAgentDetails = Commun.cheminDossierGitGoSecuri + "/AgentDetails";
 	
 	private Map<String, Materiel> listeMateriel = new ListeMateriel().getListeMateriel();
 	private Map<String, Agent> listeAgentDetails = recupListeAgentsDetails();
@@ -92,7 +93,8 @@ public class Agents {
 		String nomFichier = new File(cheminFichier).getName();
 		identifiantEmploye = nomFichier.substring(0, nomFichier.lastIndexOf('.'));
 		
-		String cheminCarteIdentite = Commun.cheminDossierGitGoSecuri + "\\Identities\\" + identifiantEmploye + ".jpg";
+//		String cheminCarteIdentite = Commun.cheminDossierGitGoSecuri + "\\Identities\\" + identifiantEmploye + ".jpg";
+		String cheminCarteIdentite = Commun.cheminDossierGitGoSecuri + "/Identities/" + identifiantEmploye + ".jpg";
 		
 		System.out.println("cheminCarteIdentite : " + cheminCarteIdentite);
 		
