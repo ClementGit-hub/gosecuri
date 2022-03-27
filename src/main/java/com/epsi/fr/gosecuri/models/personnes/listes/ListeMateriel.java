@@ -11,7 +11,8 @@ import com.epsi.fr.gosecuri.models.personnes.materiels.Materiel;
 
 public class ListeMateriel {
 	
-	public static final String cheminMateriel = Commun.cheminDossierGitGoSecuri + "\\Materials\\liste.txt";
+//	public static final String cheminMateriel = Commun.cheminDossierGitGoSecuri + "\\Materials\\liste.txt";
+	public static final String cheminMateriel = Commun.cheminDossierGitGoSecuri + "/Materials/liste.txt";
 	
 	private Map<String, Materiel> listeMateriel = new HashMap<String, Materiel>();
 

@@ -68,7 +68,8 @@ public class Recuperation {
 	
 	public File creationFichier(String cheminDossier, String nom, String extensionHtml, StringBuilder body) {
 		
-		String chemin = cheminDossier + "\\" + nom + extensionHtml;
+//		String chemin = cheminDossier + "\\" + nom + extensionHtml;
+		String chemin = cheminDossier + "/" + nom + extensionHtml;
 		
 	    try {
 	        FileWriter myWriter = new FileWriter(chemin);
@@ -127,10 +128,14 @@ public class Recuperation {
 			modif.append(ph);
 		}
 		
-		String cheminLogo = Commun.cheminDossierGitGoSecuri + "\\Images\\Logo.png";
+//		String cheminLogo = Commun.cheminDossierGitGoSecuri + "\\Images\\Logo.png";
+		String cheminLogo = Commun.cheminDossierGitGoSecuri + "/Images/Logo.png";
+		
+		
+		
 //		+ "        <div class=\"Logo\"><img src=\"Images/Logo.png\" /></div>\r\n"
 		
-		cheminLogo = "../gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Images/Logo.png";
+//		cheminLogo = "../gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Images/Logo.png";
 		
 		System.out.println("cheminLogo : " + cheminLogo);
 		
@@ -156,7 +161,8 @@ public class Recuperation {
 		StringBuffer retour = new StringBuffer();
 		StringBuffer modif = new StringBuffer();
 		
-		String imageSquareCheck = Commun.cheminDossierGitGoSecuri + "\\Images\\check-square-regular.svg";
+//		String imageSquareCheck = Commun.cheminDossierGitGoSecuri + "\\Images\\check-square-regular.svg";
+		String imageSquareCheck = Commun.cheminDossierGitGoSecuri + "/Images/check-square-regular.svg";
 		
 		System.out.println("imageSquareCheck : " + imageSquareCheck);
 		
