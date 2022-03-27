@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.epsi.fr.gosecuri.commun.Commun;
+import com.epsi.fr.gosecuri.fichiers.FichierGeneral;
 import com.epsi.fr.gosecuri.fichiers.PageHtml;
 import com.epsi.fr.gosecuri.models.personnes.Agent;
 import com.epsi.fr.gosecuri.models.personnes.listes.Agents;
@@ -18,13 +19,6 @@ public class Recuperation {
 	public List<String> listePersonnes = new ArrayList<String>();
 	public Agents agents = new Agents();
 	
-	// La flemme de mettre tout en maj
-	// Faudrait soit le mettre dans un fichier xml soit dans une classe ou interface dédié
-//    public static final String cheminDossierFichierHtml = "C:\\Users\\escan\\eclipse-workspace\\gosecuri\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\html\\";
-	
-    //Type page
-    public static final String ACCUEIL_STR = "ACCUEIL";
-    
 	public Recuperation() {
 		
         String identifiantEmploye = "";
@@ -44,9 +38,8 @@ public class Recuperation {
     		
 		}
         
-		String nomAccueil = "acceuil";
+		String nomAccueil = "index";
 		
-		// pas le temps mais il faudrait faire une interface PageHTML puis des pages AccueilHTML, etc... qui l'implémente
 		PageHtml pageAccueil = new PageHtml(nomAccueil, Commun.cheminDossierHtml);
 		pageAccueil.setBody(this.bodyAcceuil());
 		
@@ -61,14 +54,11 @@ public class Recuperation {
         	body.append("\n");
         }
         
-        File fichierMdp = creationFichier(Commun.cheminDossierMdp, "", ".htpasswd", body);
-		
-		
+        FichierGeneral fichierMdp = new FichierGeneral("", Commun.cheminDossierMdp, ".htpasswd", body);
 	}
 	
 	public File creationFichier(String cheminDossier, String nom, String extensionHtml, StringBuilder body) {
 		
-//		String chemin = cheminDossier + "\\" + nom + extensionHtml;
 		String chemin = cheminDossier + "/" + nom + extensionHtml;
 		
 	    try {
@@ -89,31 +79,6 @@ public class Recuperation {
 		
 	}
 	
-//	private File creationFichierAgent(Agent agent) {
-//		
-//		String identifiantEmploye = agent.getIdentifiantEmploye();
-//		String extensionHtml = ".html";
-//		
-//		System.out.println("ch : "+cheminDossierFichierHtml + identifiantEmploye + extensionHtml);
-//		
-//	    try {
-//	        FileWriter myWriter = new FileWriter(cheminDossierFichierHtml + identifiantEmploye + extensionHtml);
-//	        
-//	        PageHtml pageAgent = new PageHtml(extensionHtml, extensionHtml);
-//	        
-//	        myWriter.write(pageAgent.toString());
-//	        myWriter.close();
-//	        
-//	      } 
-//	      catch (IOException e) {
-//	        System.out.println("An error occurred.");
-//	        e.printStackTrace();
-//	      }
-//		
-//		return null;
-//	}
-	
-	// Localisation ???? -> dans classe PageAccueilHTML
 	public String bodyAcceuil() {
 		
 		StringBuffer retour = new StringBuffer();
@@ -128,14 +93,7 @@ public class Recuperation {
 			modif.append(ph);
 		}
 		
-//		String cheminLogo = Commun.cheminDossierGitGoSecuri + "\\Images\\Logo.png";
 		String cheminLogo = Commun.cheminDossierGitGoSecuri + "/Images/Logo.png";
-		
-		
-		
-//		+ "        <div class=\"Logo\"><img src=\"Images/Logo.png\" /></div>\r\n"
-		
-//		cheminLogo = "../gosecuri/src/main/resources/static/fichiersTest/git/GoSecuri-master/Images/Logo.png";
 		
 		System.out.println("cheminLogo : " + cheminLogo);
 		
@@ -161,14 +119,9 @@ public class Recuperation {
 		StringBuffer retour = new StringBuffer();
 		StringBuffer modif = new StringBuffer();
 		
-//		String imageSquareCheck = Commun.cheminDossierGitGoSecuri + "\\Images\\check-square-regular.svg";
 		String imageSquareCheck = Commun.cheminDossierGitGoSecuri + "/Images/check-square-regular.svg";
 		
 		System.out.println("imageSquareCheck : " + imageSquareCheck);
-		
-//		imageSquareCheck = "C:\\Users\\escan\\eclipse-workspace\\gosecuri\\gosecuri\\src\\main\\resources\\static\\fichiersTest\\git\\GoSecuri-master\\Images\\check-square-regular.svg";
-//		
-//		System.out.println("imageSquareCheck : " + imageSquareCheck);
 		
 		System.out.println("agent : " + agent.getNom());
 		System.out.println("agent.getListeMateriel() : " + agent.getListeMateriel().toString());

@@ -8,8 +8,6 @@ import com.epsi.fr.gosecuri.fonctions.Recuperation;
 public class GosecuriApplication {
 
 	public static void main(String[] args) {
-//		SpringApplication.run(GosecuriApplication.class, args);
-		
 		new Recuperation();
 	}
 

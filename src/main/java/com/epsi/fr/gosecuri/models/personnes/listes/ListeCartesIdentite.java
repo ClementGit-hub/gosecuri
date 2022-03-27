@@ -13,7 +13,6 @@ import com.epsi.fr.gosecuri.commun.Commun;
 
 public class ListeCartesIdentite {
 	
-//	public static final String cheminDossierCartesIdentites = Commun.cheminDossierGitGoSecuri + "\\Identities";
 	public static final String cheminDossierCartesIdentites = Commun.cheminDossierGitGoSecuri + "/Identities";
 	private String cheminDossierAgentDetails = "";
 	
@@ -29,7 +28,6 @@ public class ListeCartesIdentite {
 		return listeCartesIdentite;
 	}
 
-	//A revoir
 	public Map<String, ImageIcon> recupListeCartesIdentite()
     { 
       File dir  = new File(cheminDossierAgentDetails);
@@ -37,14 +35,7 @@ public class ListeCartesIdentite {
       for(File file : liste){
     	  
     	  String identifiantEmployeAvecExtension = file.getName();
-    	  
-//    	  System.out.println("c identifiantEmployeAvecExtension : "+identifiantEmployeAvecExtension);
-    	  
     	  String identifiantEmploye = identifiantEmployeAvecExtension;
-    	  
-//    	  System.out.println("c identifiantEmploye : "+identifiantEmploye);
-    	  
-//    	  System.out.println("c file.getAbsolutePath() : "+file.getAbsolutePath());
     	  
 			BufferedImage myPicture = null;
 			try {

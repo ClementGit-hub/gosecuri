@@ -9,18 +9,13 @@ import java.util.List;
 import com.epsi.fr.gosecuri.commun.Commun;
 
 public class ListeEmployes {
-//	public static final String cheminListeAgents = Commun.cheminDossierGitGoSecuri + "\\AgentsList\\staff.txt";
+	
 	public static final String cheminListeAgents = Commun.cheminDossierGitGoSecuri + "/AgentsList/staff.txt";
 
 	private List<String> listeEmployes = new ArrayList<String>();
 	
 	public ListeEmployes() {
 		listeEmployes = recupListeEmployes(cheminListeAgents);
-		
-//        for (String identifiantPersonne : listeEmployes) {
-//        	System.out.println("valeur: " + identifiantPersonne);
-//        
-//		}
 		
 	}
 	
@@ -32,16 +27,12 @@ public class ListeEmployes {
 		
 		List<String> listePersonnes = new ArrayList<String>();
                
-//        System.out.println("cheminFichier : "+cheminFichier);
-        
         try(BufferedReader br = new BufferedReader(new FileReader(cheminFichier))) 
         {
             String line;
             while ((line = br.readLine()) != null) {
             	
             	line = line.replace(" ","");
-            	
-//            	System.out.println(line);
             	
             	listePersonnes.add(line);
             }

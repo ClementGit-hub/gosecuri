@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-// voir ce github pour l'améliorer
-//https://github.com/xmlet/HtmlFlow
 public class PageHtml {
 	
 	// Base
@@ -56,7 +54,6 @@ public class PageHtml {
 	
 	public File creationFichierHtml() {
 		
-//		String chemin = cheminDossierFichierHtml + "\\" + nom + extensionHtml;
 		String chemin = cheminDossierFichierHtml + "/" + nom + extensionHtml;
 		
 	    try {

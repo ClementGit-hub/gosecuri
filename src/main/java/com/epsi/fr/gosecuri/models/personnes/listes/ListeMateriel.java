@@ -11,7 +11,6 @@ import com.epsi.fr.gosecuri.models.personnes.materiels.Materiel;
 
 public class ListeMateriel {
 	
-//	public static final String cheminMateriel = Commun.cheminDossierGitGoSecuri + "\\Materials\\liste.txt";
 	public static final String cheminMateriel = Commun.cheminDossierGitGoSecuri + "/Materials/liste.txt";
 	
 	private Map<String, Materiel> listeMateriel = new HashMap<String, Materiel>();
@@ -34,12 +33,6 @@ public class ListeMateriel {
 		
 		Map<String, Materiel> listeMateriel = new HashMap<String, Materiel>();
 		
-//        System.out.println("cheminFichier : "+cheminFichier);
-//        
-//        cheminFichier.replace("/", "\\");
-//        
-//        System.out.println("cheminFichier : "+cheminFichier);
-        
         try(BufferedReader br = new BufferedReader(new FileReader(cheminFichier))) 
         {
             String line;
@@ -49,7 +42,6 @@ public class ListeMateriel {
             	
             	if(indicePremiereMajuscule == -1) {
             		System.out.println("Erreur : indicePremiereMajuscule");
-//            		throw new Exception("indicePremiereMajuscule"); ???
             		continue;
             	}
             	

@@ -29,13 +29,8 @@ public class Agent extends Employe {
 		this.listeMateriel = listeMateriel;
 	}
 	
-	// Changer le toString
-	
 	public StringBuffer toStringHtml() {
 		StringBuffer sb = new StringBuffer();
-		
-		
-		
 		return sb;
 	}
 	

@@ -16,12 +16,10 @@ import com.epsi.fr.gosecuri.models.personnes.materiels.Materiel;
 
 public class Agents {
 	
-//	public static final String cheminDossierAgentDetails = Commun.cheminDossierGitGoSecuri + "\\AgentDetails";
 	public static final String cheminDossierAgentDetails = Commun.cheminDossierGitGoSecuri + "/AgentDetails";
 	
 	private Map<String, Materiel> listeMateriel = new ListeMateriel().getListeMateriel();
 	private Map<String, Agent> listeAgentDetails = recupListeAgentsDetails();
-//	private Map<String, ImageIcon> listeCartesIdentite = new ListeCartesIdentite(cheminDossierAgentDetails).getListeCartesIdentite();
 
 	public Agents() {
 
@@ -36,14 +34,6 @@ public class Agents {
       File[] liste = dir.listFiles();
       
       for(File file : liste){
-//        if(item.isFile())
-//        { 
-//          System.out.format("Nom du fichier: %s%n", item.getName()); 
-//        } 
-//        else if(item.isDirectory())
-//        {
-//          System.out.format("Nom du répertoir: %s%n", item.getName()); 
-//        } 
     	  
     	  String identifiantEmploye = getFileNameWithoutExtension(file.getName());
     	  
@@ -74,11 +64,6 @@ public class Agents {
 		return listeMateriel;
 	}
 
-//	public Map<String, ImageIcon> getListeCartesIdentite() {
-//		return listeCartesIdentite;
-//	}
-
-	// A modifier image !!!!
 	private Agent recupAgentsDetails(String cheminFichier) {
 		
 		String identifiantEmploye = "";
@@ -89,11 +74,9 @@ public class Agents {
 		
 		List<Materiel> listeMaterielAgent = new ArrayList<>();
 		
-		// Vraiment bofbof
 		String nomFichier = new File(cheminFichier).getName();
 		identifiantEmploye = nomFichier.substring(0, nomFichier.lastIndexOf('.'));
 		
-//		String cheminCarteIdentite = Commun.cheminDossierGitGoSecuri + "\\Identities\\" + identifiantEmploye + ".jpg";
 		String cheminCarteIdentite = Commun.cheminDossierGitGoSecuri + "/Identities/" + identifiantEmploye + ".jpg";
 		
 		System.out.println("cheminCarteIdentite : " + cheminCarteIdentite);
@@ -104,19 +87,13 @@ public class Agents {
         {
             String line;
             
-            //A revoir
             int i = 0;
             
             while ((line = br.readLine()) != null) {
             	
-//            	System.out.println(" line  : " + line);
-//            	System.out.println(" index : "+i);
-            	
             	if(line.replace(" ","").length() == 0) {
             		continue;
             	}
-            	
-//            	System.out.println("passe" );
             	
             	// Remplie les paramètres par rapport aux lignes
             	switch (i) {
@@ -133,18 +110,10 @@ public class Agents {
 						break;
 
 					default:	
-//						System.out.println("i non pris en compte");
 						break;
 				}
             	
         		if(i > 3) {
-        			
-//        	        for (Entry<String, Materiel> mapentry : this.listeMateriel.entrySet()) {
-//        	        	System.out.println("yop" + mapentry.getValue().toString());
-//        	        
-//        			}
-        	        
-//        	        System.out.println(this.listeMateriel.get(line));
         			
         			listeMaterielAgent.add(this.listeMateriel.get(line));
         			
@@ -159,9 +128,6 @@ public class Agents {
         }
         
         Agent agent = new Agent(identifiantEmploye, nom, prenom, poste, motDePasse, carteIdentite, listeMaterielAgent);
-        
-//        System.out.println("Agent : " + agent.toString());
-//        System.out.println("Agent : " + listeMaterielAgent.toString());
         
         return agent; 
    
