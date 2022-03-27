@@ -56,7 +56,8 @@ public class PageHtml {
 	
 	public File creationFichierHtml() {
 		
-		String chemin = cheminDossierFichierHtml + "\\" + nom + extensionHtml;
+//		String chemin = cheminDossierFichierHtml + "\\" + nom + extensionHtml;
+		String chemin = cheminDossierFichierHtml + "/" + nom + extensionHtml;
 		
 	    try {
 	        FileWriter myWriter = new FileWriter(chemin);
