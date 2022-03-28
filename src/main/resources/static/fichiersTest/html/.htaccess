@@ -1,4 +1,4 @@
-AuthUserFile .htpasswd
+AuthUserFile "var/jenkins_home/workspace/GoSecuri - Deploy/src/main/resources/static/fichiersTest/html/.htpasswd"
 AuthName "Accès protégé"
 AuthType Basic
 Require valid-user
