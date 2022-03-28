@@ -89,7 +89,7 @@ public class Recuperation {
 			
 			System.out.println("mapentry.getKey() : " + mapentry.getKey());
 			
-			ph = "            <a href=\"" + mapentry.getKey() +".html\"><li>" + mapentry.getValue().nom + "</li></a>\r\n";
+			ph = "            <a href=\"" + mapentry.getKey() +".html\"><li>" + mapentry.getValue().getPrenom() + " " + mapentry.getValue().getNom() + "</li></a>\r\n";
 			modif.append(ph);
 		}
 		
