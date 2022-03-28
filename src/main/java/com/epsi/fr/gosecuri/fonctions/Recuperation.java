@@ -120,7 +120,6 @@ public class Recuperation {
 		StringBuffer retour = new StringBuffer();
 		StringBuffer modif = new StringBuffer();
 		
-//		String imageSquareCheck = Commun.cheminDossierGitGoSecuri + "/Images/check-square-regular.svg";
 		String imageSquareCheck = "/Images/check-square-regular.svg";
 		String imageSquareUnCheck = "/Images/square-regular.svg";
 		
@@ -146,7 +145,7 @@ public class Recuperation {
 			modif.append("</li>");
 		}
 		
-		String cheminAccesCarteId = agent.getCarteIdentite().getCheminAcces();
+		String cheminAccesCarteId = "/Images/" + agent.getIdentifiantEmploye() + "/.jpg";
 		System.out.println("chemin carte id : " + cheminAccesCarteId);
 		
 		retour.append("<body>"
@@ -162,8 +161,6 @@ public class Recuperation {
 					+ modif
 					+ "</ul>"
 					+ "<div class=\"frame-img\">"
-//					+ "<img src=\"Images/" + cheminAccesCarteId + "\" alt=\"Id card\" class=\"id-card\">"
-//					+ "<img src=" + cheminAccesCarteId + "\" alt=\"Id card\" class=\"id-card\">"
 					+ "<img src=" + cheminAccesCarteId + ">"
 					+ "</div>"
 					+ "</div>"
