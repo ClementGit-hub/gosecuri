@@ -120,7 +120,8 @@ public class Recuperation {
 		StringBuffer retour = new StringBuffer();
 		StringBuffer modif = new StringBuffer();
 		
-		String imageSquareCheck = Commun.cheminDossierGitGoSecuri + "/Images/check-square-regular.svg";
+//		String imageSquareCheck = Commun.cheminDossierGitGoSecuri + "/Images/check-square-regular.svg";
+		String imageSquareCheck = "/Images/check-square-regular.svg";
 		
 		System.out.println("imageSquareCheck : " + imageSquareCheck);
 		
