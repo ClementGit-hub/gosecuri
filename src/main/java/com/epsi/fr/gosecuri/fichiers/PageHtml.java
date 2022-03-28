@@ -28,6 +28,10 @@ public class PageHtml {
 
 	public String toString() {
 		
+		String cheminCss = "CSS.css";
+		String cheminLogo = "Images/Logo.png";
+//		String cheminLogo = "";
+		
 		StringBuilder maquette = new StringBuilder();
 		
 		maquette.append("<!DOCTYPE html>");
@@ -38,8 +42,8 @@ public class PageHtml {
 		maquette.append("\n");
 		maquette.append("<meta charset=\"UTF-8\">");
 		maquette.append("\n");
-//		maquette.append("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap\"/>");
-//		maquette.append("<link rel=\"icon\" type=\"image/png\" href=\"Images/Logo.png\" />");
+		maquette.append("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap\"/>");
+		maquette.append("<link rel=\"icon\" type=\"image/png\" href=\"" + cheminLogo + "\" />");
 		maquette.append("<title>"+titrePage+"</title>");
 		maquette.append("\n");
 		maquette.append("</head>");
@@ -47,7 +51,7 @@ public class PageHtml {
 		maquette.append(body);
 		maquette.append("\n");
 		maquette.append("</html>");
-//		maquette.append("<link rel=\"stylesheet\" href=\"CSS.css\">");
+		maquette.append("<link rel=\"stylesheet\"" + cheminCss + "\">");
 		
 		return maquette.toString();
 	}
