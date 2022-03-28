@@ -156,8 +156,7 @@ public class Recuperation {
 					+ "<div class=\"container-agent\">"
 					+ "<p class=\"agent-name\">"
 					+ agent.getPrenomNom()
-					+ "</p>"
-					+ "<p class=\"poste\">"
+					+ "</br>"
 					+ agent.getPoste()
 					+ "</p>"
 					+ "<ul class=\"materials-list\">"
