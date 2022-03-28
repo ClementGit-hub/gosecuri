@@ -130,7 +130,7 @@ public class Recuperation {
 		System.out.println("agent.getListeMateriel() : " + agent.getListeMateriel().toString());
 		
 		for (Entry<String, Materiel> mapentry : agents.getListeMateriel().entrySet()) {
-			
+			 
 			String nomMateriel =  mapentry.getValue().getNom();
 			
 			modif.append("<li>" + nomMateriel);
