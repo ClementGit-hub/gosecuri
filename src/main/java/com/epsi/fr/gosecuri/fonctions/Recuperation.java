@@ -145,7 +145,7 @@ public class Recuperation {
 			modif.append("</li>");
 		}
 		
-		String cheminAccesCarteId = "/Images/" + agent.getIdentifiantEmploye() + "/.jpg";
+		String cheminAccesCarteId = "/Images/" + agent.getIdentifiantEmploye() + ".jpg";
 		System.out.println("chemin carte id : " + cheminAccesCarteId);
 		
 		retour.append("<body>"
