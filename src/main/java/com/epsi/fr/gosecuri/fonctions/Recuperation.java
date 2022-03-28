@@ -122,6 +122,7 @@ public class Recuperation {
 		
 //		String imageSquareCheck = Commun.cheminDossierGitGoSecuri + "/Images/check-square-regular.svg";
 		String imageSquareCheck = "/Images/check-square-regular.svg";
+		String imageSquareUnCheck = "/Images/square-regular.svg";
 		
 		System.out.println("imageSquareCheck : " + imageSquareCheck);
 		
@@ -135,10 +136,10 @@ public class Recuperation {
 			modif.append("<li>" + nomMateriel);
 
 			if(bMaterielExiste(nomMateriel, agent)) {
-				modif.append(" <img src=" + imageSquareCheck + " height=\"20\" width=\"20\"> 1");
+				modif.append(" <img src=" + imageSquareCheck + " height=\"20\" width=\"20\">");
 
 			} else {
-				modif.append(" <img src=" + imageSquareCheck + " height=\"20\" width=\"20\"> 2");
+				modif.append(" <img src=" + imageSquareUnCheck + " height=\"20\" width=\"20\">");
 				
 			}
 			
