@@ -51,7 +51,7 @@ public class PageHtml {
 		maquette.append(body);
 		maquette.append("\n");
 		maquette.append("</html>");
-		maquette.append("<link rel=\"stylesheet\"" + cheminCss + "\">");
+		maquette.append("<link rel=\"stylesheet\" href=\"" + cheminCss + "\">");
 		
 		return maquette.toString();
 	}
