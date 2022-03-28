@@ -161,7 +161,7 @@ public class Recuperation {
 					+ modif
 					+ "</ul>"
 					+ "<div class=\"frame-img\">"
-					+ "<img src=" + cheminAccesCarteId + ">"
+					+ "<img class=\"id-card\" src=" + cheminAccesCarteId + ">"
 					+ "</div>"
 					+ "</div>"
 					+ "</body>");
