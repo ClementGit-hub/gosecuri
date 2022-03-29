@@ -7,14 +7,8 @@ import java.io.IOException;
 public class PageHtml {
 	
 	// Base
-//	private String head = "head";
 	private String titrePage = "GOsecuri";
-//	private String linkCss = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css";
 	private String body = "Hello world";
-//	private String heading = "heading";
-//	private String titreCorps = "Title: ";
-//	private String description = "description";
-//	private String priority = "priority";
 	
 	// Creation html
 	private String nom = "";

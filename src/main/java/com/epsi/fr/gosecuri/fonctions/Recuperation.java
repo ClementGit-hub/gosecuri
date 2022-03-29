@@ -93,7 +93,6 @@ public class Recuperation {
 			modif.append(ph);
 		}
 		
-//		String cheminLogo = Commun.cheminDossierGitGoSecuri + "/Images/Logo.png";
 		String cheminLogo = "/Images/Logo.png";
 		
 		System.out.println("cheminLogo : " + cheminLogo);
