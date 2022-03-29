@@ -1,4 +1,4 @@
-AuthUserFile /usr/local/apache2/htdocs/.htpasswd
+AuthUserFile /usr/local/apache2/htdocs/mdp/.htpasswd
 AuthName "Accès protégé"
 AuthType Basic
 
