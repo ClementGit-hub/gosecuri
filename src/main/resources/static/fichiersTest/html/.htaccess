@@ -1,0 +1,7 @@
+AuthUserFile /usr/local/apache2/htdocs/.htpasswd
+AuthName "Accès protégé"
+AuthType Basic
+
+<LIMIT GET POST>
+Require valid-user
+</LIMIT>
